@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -59,10 +59,12 @@ public class MainActivity extends FragmentActivity {
 		viewpager2.setAdapter(new MypagerAdapter());
 		viewpager2.addOnPageChangeListener(new OnPageChangeListener() {
 			
+			private int  index=0;
+		
 			@Override
 			public void onPageSelected(int arg0) {
-				
-				viewpager1.setCurrentItem(arg0);
+				index=arg0;
+			   
 			}
 			
 			@Override
@@ -75,18 +77,22 @@ public class MainActivity extends FragmentActivity {
 			
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-			
-				
+			   if(arg0==0){
+					viewpager1.setCurrentItem(index);
+			   }
+				//Log.v("onPageScrollStateChanged", arg0+"");
 			}
 		});
 		 //外部ViewPager
 		viewpager1.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager()));
 		viewpager1.addOnPageChangeListener(new OnPageChangeListener() {
 			
+			private int index=0;
+			
 			@Override
 			public void onPageSelected(int arg0) {
-				
-				viewpager2.setCurrentItem(arg0);
+				index=arg0;
+				//Log.v("onPageSelected", ""+arg0);
 			}
 			
 			@Override
@@ -95,7 +101,7 @@ public class MainActivity extends FragmentActivity {
 				 //arg1当页面前滑动百分比
 				 //arg2当前页面滑动像素
 				
-				//Log.v("onPageScrolled", "arg0"+arg0+"arg1"+arg1+"arg2"+arg2);
+				//Log.v("onPageScrolled", "arg0"+arg0+"arg1"+arg1+"arg2-"+arg2);
 				int width=viewpager2.getWidth();
 				
 			 	viewpager2.scrollTo((int)(width*arg0+width*arg1), 0);
@@ -103,8 +109,11 @@ public class MainActivity extends FragmentActivity {
 			
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-				
-			
+				Log.v("onPageScrollStateChanged", arg0+"");
+				 if(arg0==0){
+						viewpager2.setCurrentItem(index);
+				 }
+			  
 			}
 		});
 	}
