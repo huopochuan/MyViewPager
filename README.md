@@ -5,5 +5,5 @@
 ![](http://jcodecraeer.com/uploads/141031/1-141031155939511.gif)
 <br/>
 通过addOnPageChangeListener实现<br>
-![]((https://github.com/huopochuan/MyViewPager/raw/master/img.gif)
+![](https://github.com/huopochuan/MyViewPager/raw/master/img.gif)
 
